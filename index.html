@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI工具集成平台 - 您的智能助手中心</title>
+    <meta name="description" content="集成多种AI工具的一站式平台，包含文档处理、视频编辑、文章创作、音乐生成等功能">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>🤖 AI工具集成平台</h1>
+                <p class="tagline">一站式智能工具中心</p>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn" onclick="scrollToSection('tools')">工具浏览</button>
+                <button class="nav-btn" onclick="toggleChat()">💬 DeepSeek助手</button>
+                <button class="nav-btn" onclick="scrollToSection('about')">关于</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- DeepSeek智能助手聊天窗口 -->
+    <div id="chatWindow" class="chat-window">
+        <div class="chat-header">
+            <h3>🧠 DeepSeek智能助手</h3>
+            <button class="close-btn" onclick="toggleChat()">✕</button>
+        </div>
+        <div id="chatMessages" class="chat-messages">
+            <div class="message ai-message">
+                <p>您好！我是DeepSeek智能助手。我可以帮您：</p>
+                <ul>
+                    <li>推荐合适的AI工具</li>
+                    <li>解答工具使用问题</li>
+                    <li>规划您的工作流程</li>
+                    <li>提供技术建议</li>
+                </ul>
+                <p>有什么我可以帮您的吗？</p>
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="输入您的问题..." onkeypress="handleChatKeyPress(event)">
+            <button onclick="sendMessage()">发送</button>
+        </div>
+        <div class="api-config">
+            <details>
+                <summary>⚙️ API配置</summary>
+                <div class="config-content">
+                    <label>DeepSeek API Key:</label>
+                    <input type="password" id="apiKey" placeholder="sk-..." value="sk-785048fc14194b56b9dde959040cc765">
+                    <small>您的API密钥仅存储在本地浏览器中</small>
+                </div>
+            </details>
+        </div>
+    </div>
+
+    <!-- 主内容区域 -->
+    <main class="main-content">
+        <div class="container">
+            <!-- 欢迎横幅 -->
+            <section class="hero">
+                <h2>探索强大的AI工具生态</h2>
+                <p>我们精选了8大分类、32款优质AI工具，助力您的创作与工作</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">32+</span>
+                        <span class="stat-label">AI工具</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">8</span>
+                        <span class="stat-label">工具分类</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">智能助手</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 分类筛选 -->
+            <section class="filter-section">
+                <h3>选择工具分类</h3>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" onclick="filterCategory('all')">全部</button>
+                    <button class="filter-btn" onclick="filterCategory('document')">📄 文档处理</button>
+                    <button class="filter-btn" onclick="filterCategory('video')">🎬 视频处理</button>
+                    <button class="filter-btn" onclick="filterCategory('writing')">✍️ 文章创作</button>
+                    <button class="filter-btn" onclick="filterCategory('audio')">🎵 音乐音频</button>
+                    <button class="filter-btn" onclick="filterCategory('image')">🎨 图像处理</button>
+                    <button class="filter-btn" onclick="filterCategory('code')">💻 代码开发</button>
+                    <button class="filter-btn" onclick="filterCategory('translate')">🌐 翻译工具</button>
+                    <button class="filter-btn" onclick="filterCategory('data')">📊 数据分析</button>
+                </div>
+            </section>
+
+            <!-- AI工具展示区 -->
+            <section id="tools" class="tools-section">
+                <!-- 文档处理类 -->
+                <div class="category-group" data-category="document">
+                    <h3 class="category-title">📄 文档处理类</h3>
+                    <div class="tools-grid">
+                        <div class="tool-card">
+                            <div class="tool-icon">📊</div>
+                            <h4>Gamma</h4>
+                            <p class="tool-desc">AI驱动的PPT生成工具</p>
+                            <p class="tool-provider">Gamma App</p>
+                            <button class="tool-btn" onclick="openTool('https://gamma.app')">访问工具</button>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-icon">📑</div>
+                            <h4>Lumin PDF</h4>
+                            <p class="tool-desc">智能PDF编辑和协作平台</p>
+                            <p class="tool-provider">Lumin</p>
+                            <button class="tool-btn" onclick="openTool('https://www.luminpdf.com')">访问工具</button>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-icon">📝</div>
+                            <h4>Smallpdf</h4>
+                            <p class="tool-desc">在线PDF转换和处理工具</p>
+                            <p class="tool-provider">Smallpdf GmbH</p>
+                            <button class="tool-btn" onclick="openTool('https://smallpdf.com')">访问工具</button>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-icon">📋</div>
+                            <h4>Docsumo</h4>
+                            <p class="tool-desc">智能文档处理和数据分析</p>
+                            <p class="tool-provider">Docsumo</p>
+                            <button class="tool-btn" onclick="openTool('https://www.docsumo.com')">访问工具</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 视频处理类 -->
+                <div class="category-group" data-category="video">
+                    <h3 class="category-title">🎬 视频处理类</h3>
+                    <div class="tools-grid">
+                        <div class="tool-card">
+                            <div class="tool-icon">🎥</div>
+                            <h4>Runway</h4>
+                            <p class="tool-desc">AI视频生成和编辑平台</p>
+                            <p class="tool-provider">Runway ML</p>
+                            <button class="tool-btn" onclick="openTool('https://runwayml.com')">访问工具</button>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-icon">🎞️</div>
+                            <h4>Descript</h4>
+                            <p class="tool-desc">智能视频剪辑和字幕生成</p>
+                            <p class="tool-provider">Descript Inc.</p>
+                            <button class="tool-btn" onclick="openTool('https://www.descript.com')">访问工具</button>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-icon">👤</div>
+                            <h4>Synthesia</h4>
+                            <p class="tool-desc">AI视频生成和虚拟形象制作</p>
+                            <p class="tool-provider">Synthesia</p>
+                            <button class="tool-btn" onclick="openTool('https://www.synthesia.io')">访问工具</button>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-icon">🎬</div>
+                            <h4>Pictory</h4>
+                            <p class="tool-desc">自动视频生成和编辑工具</p>
+                            <p class="tool-provider">Pictory AI</p>
+                            <button class="tool-btn" onclick="openTool('https://pictory.ai')">访问工具</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 文章创作类 -->
+                <div class="category-group" data-category="writing">
+                    <h3 class="category-title">✍️ 文章创作类</h3>
+                    <div class="tools-grid">
+                        <div class="tool-card">
+                            <div class="tool-icon">✨</div>
+                            <h4>Jasper</h4>
+                            <p class="tool-desc">AI写作助手和内容生成</p>
+                            <p class="tool-provider">Jasper AI</p>
+                            <button class="tool-btn" onclick="openTool('https://www.jasper.ai')">访问工具</button>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-icon">📝</div>
+                            <h4>Copy.ai</h4>
+                            <p class="tool-desc">营销文案和内容创作工具</p>
+                            <p class="tool-provider">Copy AI</p>
+                            <button class="tool-btn" onclick="openTool('https://www.copy.ai')">访问工具</button>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-icon">🖊️</div>
+                            <h4>QuillBot</h4>
+                            <p class="tool-desc">文本改写和语法检查工具</p>
+                            <p class="tool-provider">QuillBot</p>
+                            <button class="tool-btn" onclick="openTool('https://quillbot.com')">访问工具</button>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-icon">📄</div>
+                            <h4>Writesonic</h4>
+                            <p class="tool-desc">AI文章生成和优化平台</p>
+                            <p class="tool-provider">Writesonic</p>
+                            <button class="tool-btn" onclick="openTool('https://writesonic.com')">访问工具</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 音乐音频类 -->
+                <div class="category-group" data-category="audio">
+                    <h3 class="category-title">🎵 音乐音频类</h3>
+                    <div class="tools-grid">
+                        <div class="tool-card">
+                            <div class="tool-icon">🎹</div>
+                            <h4>AIVA</h4>
+                            <p class="tool-desc">AI音乐创作和生成平台</p>
+                            <p class="tool-provider">AIVA Technologies</p>
+                            <button class="tool-btn" onclick="openTool('https://www.aiva.ai')">访问工具</button>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-icon">🎙️</div>
+                            <h4>Murf</h4>
+                            <p class="tool-desc">智能语音合成和配音工具</p>
+                            <p class="tool-provider">Murf AI</p>
+                            <button class="tool-btn" onclick="openTool('https://murf.ai')">访问工具</button>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-icon">🎧</div>
+                            <h4>Lalal.ai</h4>
+                            <p class="tool-desc">音频分离和人声提取工具</p>
+                            <p class="tool-provider">Lalal.ai</p>
+                            <button class="tool-btn" onclick="openTool('https://www.lalal.ai')">访问工具</button>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-icon">🎶</div>
+                            <h4>Amper Music</h4>
+                            <p class="tool-desc">AI音乐创作和配乐生成</p>
+                            <p class="tool-provider">Amper Music</p>
+                            <button class="tool-btn" onclick="openTool('https://www.ampermusic.com')">访问工具</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 图像处理类 -->
+                <div class="category-group" data-category="image">
+                    <h3 class="category-title">🎨 图像处理类</h3>
+                    <div class="tools-grid">
+                        <div class="tool-card">
+                            <div class="tool-icon">🖼️</div>
+                            <h4>Midjourney</h4>
+                            <p class="tool-desc">AI图像生成和创作平台</p>
+                            <p class="tool-provider">Midjourney</p>
+                            <button class="tool-btn" onclick="openTool('https://www.midjourney.com')">访问工具</button>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-icon">🎨</div>
+                            <h4>DALL-E</h4>
+                            <p class="tool-desc">文本到图像生成系统</p>
+                            <p class="tool-provider">OpenAI</p>
+                            <button class="tool-btn" onclick="openTool('https://openai.com/dall-e')">访问工具</button>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-icon">✂️</div>
+                            <h4>Remove.bg</h4>
+                            <p class="tool-desc">智能背景移除工具</p>
+                            <p class="tool-provider">Remove.bg</p>
+                            <button class="tool-btn" onclick="openTool('https://www.remove.bg')">访问工具</button>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-icon">🖌️</div>
+                            <h4>Prisma</h4>
+                            <p class="tool-desc">艺术风格转换和滤镜应用</p>
+                            <p class="tool-provider">Prisma Labs</p>
+                            <button class="tool-btn" onclick="openTool('https://prisma-ai.com')">访问工具</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 代码开发类 -->
+                <div class="category-group" data-category="code">
+                    <h3 class="category-title">💻 代码开发类</h3>
+                    <div class="tools-grid">
+                        <div class="tool-card">
+                            <div class="tool-icon">🤖</div>
+                            <h4>GitHub Copilot</h4>
+                            <p class="tool-desc">AI代码生成和补全工具</p>
+                            <p class="tool-provider">GitHub/OpenAI</p>
+                            <button class="tool-btn" onclick="openTool('https://github.com/features/copilot')">访问工具</button>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-icon">⚡</div>
+                            <h4>Tabnine</h4>
+                            <p class="tool-desc">AI代码自动完成助手</p>
+                            <p class="tool-provider">Tabnine</p>
+                            <button class="tool-btn" onclick="openTool('https://www.tabnine.com')">访问工具</button>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-icon">🔍</div>
+                            <h4>DeepCode</h4>
+                            <p class="tool-desc">AI代码审查和错误检测</p>
+                            <p class="tool-provider">DeepCode SA</p>
+                            <button class="tool-btn" onclick="openTool('https://www.deepcode.ai')">访问工具</button>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-icon">🪁</div>
+                            <h4>Kite</h4>
+                            <p class="tool-desc">AI编程助手和代码补全</p>
+                            <p class="tool-provider">Kite</p>
+                            <button class="tool-btn" onclick="openTool('https://www.kite.com')">访问工具</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 翻译工具类 -->
+                <div class="category-group" data-category="translate">
+                    <h3 class="category-title">🌐 翻译工具类</h3>
+                    <div class="tools-grid">
+                        <div class="tool-card">
+                            <div class="tool-icon">🌍</div>
+                            <h4>DeepL</h4>
+                            <p class="tool-desc">高质量文本翻译服务</p>
+                            <p class="tool-provider">DeepL GmbH</p>
+                            <button class="tool-btn" onclick="openTool('https://www.deepl.com')">访问工具</button>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-icon">🔤</div>
+                            <h4>Google Translate</h4>
+                            <p class="tool-desc">多语言翻译和实时翻译</p>
+                            <p class="tool-provider">Google</p>
+                            <button class="tool-btn" onclick="openTool('https://translate.google.com')">访问工具</button>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-icon">💬</div>
+                            <h4>Microsoft Translator</h4>
+                            <p class="tool-desc">文本和语音翻译服务</p>
+                            <p class="tool-provider">Microsoft</p>
+                            <button class="tool-btn" onclick="openTool('https://www.bing.com/translator')">访问工具</button>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-icon">☁️</div>
+                            <h4>Amazon Translate</h4>
+                            <p class="tool-desc">神经网络机器翻译服务</p>
+                            <p class="tool-provider">Amazon AWS</p>
+                            <button class="tool-btn" onclick="openTool('https://aws.amazon.com/translate')">访问工具</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 数据分析类 -->
+                <div class="category-group" data-category="data">
+                    <h3 class="category-title">📊 数据分析类</h3>
+                    <div class="tools-grid">
+                        <div class="tool-card">
+                            <div class="tool-icon">📈</div>
+                            <h4>Tableau</h4>
+                            <p class="tool-desc">智能数据可视化和分析平台</p>
+                            <p class="tool-provider">Tableau/Salesforce</p>
+                            <button class="tool-btn" onclick="openTool('https://www.tableau.com')">访问工具</button>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-icon">📊</div>
+                            <h4>Power BI</h4>
+                            <p class="tool-desc">商业智能和数据可视化工具</p>
+                            <p class="tool-provider">Microsoft</p>
+                            <button class="tool-btn" onclick="openTool('https://powerbi.microsoft.com')">访问工具</button>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-icon">🔮</div>
+                            <h4>Akkio</h4>
+                            <p class="tool-desc">无代码AI数据分析和预测</p>
+                            <p class="tool-provider">Akkio</p>
+                            <button class="tool-btn" onclick="openTool('https://www.akkio.com')">访问工具</button>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-icon">🐵</div>
+                            <h4>MonkeyLearn</h4>
+                            <p class="tool-desc">文本分析和数据可视化</p>
+                            <p class="tool-provider">MonkeyLearn</p>
+                            <button class="tool-btn" onclick="openTool('https://monkeylearn.com')">访问工具</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 关于部分 -->
+            <section id="about" class="about-section">
+                <h3>关于AI工具集成平台</h3>
+                <div class="about-content">
+                    <p>本平台集成了当前最优质的32款AI工具，涵盖文档处理、视频编辑、文章创作、音乐生成、图像处理、代码开发、翻译和数据分析等8大领域。</p>
+                    <p>通过DeepSeek智能助手，您可以获得个性化的工具推荐和使用指导，让AI技术真正为您的工作和创作赋能。</p>
+                    <div class="features">
+                        <div class="feature">
+                            <span class="feature-icon">🎯</span>
+                            <h4>精选工具</h4>
+                            <p>每个分类都经过精心筛选</p>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-icon">🤝</span>
+                            <h4>智能助手</h4>
+                            <p>DeepSeek随时为您提供帮助</p>
+                        </div>
+                        <div class="feature">
+                            <span class="feature-icon">🚀</span>
+                            <h4>简单易用</h4>
+                            <p>无需编程，即开即用</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 AI工具集成平台. 由 DeepSeek 提供智能支持.</p>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

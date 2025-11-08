@@ -1,0 +1,25 @@
+{
+  "name": "ai-tools-hub",
+  "version": "1.0.0",
+  "description": "AI工具集成平台 - 集成32款AI工具，带DeepSeek智能助手",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "ai",
+    "tools",
+    "deepseek",
+    "ai-assistant"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
